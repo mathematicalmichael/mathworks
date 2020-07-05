@@ -2,15 +2,15 @@
 new_page_extension: md
 auto_deploy: false
 admin_path: "/static/admin"
-webhook_url: 
+webhook_url:
 sections:
 - type: directory
-  path: projects
-  label: Projects
+  path: i
+  label: Images
   create: documents
   match: "**/*.md"
   templates:
-  - project
+  - i
 - type: directory
   path: journal
   label: Journal

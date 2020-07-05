@@ -4,20 +4,24 @@
     <div class="container">
       <div class="journal-hero">
         <h1 class="journal-header">
-          Posts
+          Albums
         </h1>
       </div>
     </div>
 
     <g-link
       :to="item.node.path"
-      v-for="item in $page.posts.edges"
+      v-for="item in $page.projects.edges"
       :key="item.node.id"
       class="journal-post"
     >
       <div class="container journal">
         <h2 class="journal-title">{{ item.node.title }}</h2>
-        <p class="journal-excerpt">{{ item.node.excerpt }}</p>
+        <ul class="categories">
+          <li class="category" v-for="cat in item.node.categories" :key="cat">
+            {{ cat }}
+          </li>
+        </ul>
       </div>
     </g-link>
 
@@ -25,17 +29,19 @@
 </template>
 
 <page-query>
-query Journal {
-	posts: allJournalPost {
+query Projects {
+	projects: allImagePost {
     edges {
       node {
         id
-        path
+        date (format: "YYYY")
         title
-        excerpt
+        categories
+        thumbnail (quality: 90)
+        path
       }
     }
-  }
+  },
 }
 </page-query>
 
@@ -65,9 +71,6 @@ export default {
   text-decoration: none;
   transition: background 0.5s ease;
 }
-.journal-post > * {
-  transition: transform 0.5s ease;
-}
 .journal-post h1,
 .journal-post h2 {
   margin: 0;
@@ -91,5 +94,14 @@ export default {
   .journal-post {
     padding: 5rem 0;
   }
+}
+
+.categories {
+  display: flex;
+  list-style: none;
+  padding: 0;
+}
+.category {
+  margin-right: 0.25em;
 }
 </style>

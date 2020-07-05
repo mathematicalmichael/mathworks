@@ -8,26 +8,38 @@
           <h1 class="project-title" v-html="$page.post.title" />
           <div class="project-info">
 
-            <div class="categories-container">
-              <div class="categories">
-                <span class="label">Categories</span>
-                <span 
-                  class="category"
-                  v-for="(category, index) in $page.post.categories" 
-                  :key="index"
-                  v-text="category"
-                />
-              </div>
-            </div>
+
 
             <div class="year-container">
               <span class="label">Year</span>
               <div v-html="$page.post.date"/>
             </div>
+
+            <div class="year-container">
+              <span class="label">ISO</span>
+              <div v-html="$page.post.iso"/>
+            </div>
+
+
+
           </div>
         </div>
 
         <div v-html="$page.post.content" class="content" />
+
+
+
+      <div class="categories-container">
+        <div class="categories">
+          <span class="label">Categories</span>
+          <span
+            class="category"
+            v-for="(category, index) in $page.post.categories"
+            :key="index"
+            v-text="category"
+          />
+        </div>
+      </div>
 
       </div>
 
@@ -36,12 +48,13 @@
 </template>
 
 <page-query>
-query ProjectPost ($path: String!) {
-  post: projectPost (path: $path) {
+query ImagePost ($path: String!) {
+  post: imagePost (path: $path) {
     title
     date (format: "YYYY")
     content
     categories
+    iso
     project_bg_color
     project_fg_color
   }

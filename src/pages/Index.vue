@@ -10,7 +10,7 @@
 
 <page-query>
 query Posts {
-	projects: allProjectPost {
+	projects: allImagePost {
     edges {
       node {
         id
