@@ -8,11 +8,10 @@
           <h1 class="project-title" v-html="$page.post.title" />
           <div class="project-info">
 
-
-
             <div class="year-container">
-              <span class="label">Year</span>
-              <div v-html="$page.post.date"/>
+              <span class="label">Date</span>
+              <div/>
+              {{$page.post.date}}
             </div>
 
             <div class="year-container">
@@ -20,7 +19,25 @@
               <div v-html="$page.post.iso"/>
             </div>
 
+            <div class="year-container">
+              <span class="label">Lens</span>
+              <div/> {{$page.post.lens}} mm
+            </div>
 
+            <div class="year-container">
+              <span class="label">f/</span>
+              <div/> {{$page.post.fstop}}
+            </div>
+
+            <div class="year-container">
+              <span class="label">Exp</span>
+              <div/> {{$page.post.exposure}}
+            </div>
+
+            <!-- <div class="year-container">
+              <span class="label">Size</span>
+              <div/> {{$page.post.width}}x{{$page.post.height}}
+            </div> -->
 
           </div>
         </div>
@@ -51,10 +68,15 @@
 query ImagePost ($path: String!) {
   post: imagePost (path: $path) {
     title
-    date (format: "YYYY")
+    date (format: "YYYY-MM-DD")
     content
     categories
     iso
+    lens
+    fstop
+    exposure
+    width
+    height
     project_bg_color
     project_fg_color
   }
