@@ -4,7 +4,7 @@
     <div class="container">
       <div class="journal-hero">
         <h1 class="journal-header">
-          Albums
+          Image Feed
         </h1>
       </div>
     </div>
