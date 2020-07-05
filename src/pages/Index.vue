@@ -2,7 +2,7 @@
   <Layout>
     <div class="container">
       <Hero />
-      <ProjectsGrid :projects="$page.projects.edges" />
+      <ImagesGrid :projects="$page.projects.edges" />
     </div>
     <LatestJournals :journals="$page.journals.edges" />
   </Layout>
@@ -36,14 +36,14 @@ query Posts {
 
 <script>
 import Hero from "@/components/Hero"
-import ProjectsGrid from "@/components/ProjectsGrid"
+import ImagesGrid from "@/components/ImagesGrid"
 import LatestJournals from "@/components/LatestJournals"
 
 export default {
   components: {
     Hero,
-    ProjectsGrid,
-    LatestJournals
+    LatestJournals,
+    ImagesGrid
   }
 }
 </script>
