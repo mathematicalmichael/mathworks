@@ -37,12 +37,12 @@ query Posts {
 <script>
 import Hero from "@/components/Hero"
 import ImagesGrid from "@/components/ImagesGrid"
-import LatestJournals from "@/components/LatestJournals"
+// import LatestJournals from "@/components/LatestJournals"
 
 export default {
   components: {
     Hero,
-    LatestJournals,
+    // LatestJournals,
     ImagesGrid
   }
 }
