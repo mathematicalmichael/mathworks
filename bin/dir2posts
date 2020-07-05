@@ -1,0 +1,41 @@
+#!/bin/bash
+ALBUM=${PWD##*/}
+IMGS=$(ls *.JPG | sed s'/.JPG//g' )
+mkdir -p pages/
+for i in $IMGS; do
+    exif $i.JPG > $i.txt
+    extract_info $i.txt
+    echo ""
+    echo "Building page for $i"
+    cat pr-$i.txt | grep ISO | echo ISO=$(awk '{print $3}') > .temp_env
+    cat pr-$i.txt | grep Focal | echo FOCAL=$(awk '{print $7}') >> .temp_env
+    cat pr-$i.txt | grep "F Num" | echo FSTOP=$(awk '{print $4}') >> .temp_env
+    cat pr-$i.txt | grep "Width" | echo WIDTH=$(awk '{print $4}') >> .temp_env
+    cat pr-$i.txt | grep "Height" | echo HEIGHT=$(awk '{print $4}') >> .temp_env
+    cat pr-$i.txt | grep "Exposure" | echo EXPOSURE=\"$(awk '{print $4}')\" >> .temp_env
+    cat pr-$i.txt | grep "Date" | echo DATE=\"$(awk '{print $4}' | sed s'|,||g')\" >> .temp_env
+    . .temp_env
+    cat template.md | sed "s|IMAGE_NAME|$i|g" \
+	    	| sed "s|ALBUM_NAME|$ALBUM|g" \
+		| sed "s|ISO|$ISO|g" \
+		| sed "s|FOCAL|$FOCAL|g " \
+		| sed "s|FSTOP|$FSTOP|g" \
+		| sed "s|WIDTH|$WIDTH|g" \
+		| sed "s|HEIGHT|$HEIGHT|g" \
+		| sed "s|EXPOSURE|$EXPOSURE|g" \
+		| sed "s|DATE|$DATE|g" \
+		> pages/$i.md
+    # append table to page (not needed if parsing data)
+    #echo "" >> pages/$i.md
+    #echo "Property | Value" >> pages/$i.md
+    #echo "---------|------" >> pages/$i.md
+    #cat pr-$i.txt >> pages/$i.md
+    rm pr-$i.txt
+    rm $i.txt
+    cp $i.JPG $i.jpg
+    rm .temp_env
+done
+
+echo "Moving"
+mv pages/* ~/repos/gridsome-forestry-starter/i/ && \
+rm -rf pages
