@@ -111,7 +111,7 @@ export default {
   font-size: 0.8rem;
 }
 .project-info > div {
-  margin-right: 2rem;
+  margin-right: 1.5rem;
 }
 .project-info > div:last-of-type {
   margin: 0;
