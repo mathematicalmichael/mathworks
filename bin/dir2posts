@@ -37,5 +37,5 @@ for i in $IMGS; do
 done
 
 echo "Moving"
-mv pages/* ~/repos/gridsome-forestry-starter/i/ && \
+mv pages/* ~/repos/mathworks/i/ && \
 rm -rf pages
