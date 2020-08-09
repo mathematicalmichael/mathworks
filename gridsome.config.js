@@ -11,8 +11,8 @@ module.exports = {
     {
       use: "@gridsome/source-filesystem",
       options: {
-        path: "projects/**/*.md",
-        typeName: "ProjectPost",
+        path: "i/**/*.md",
+        typeName: "ImagePost",
         resolveAbsolutePaths: true,
         remark: {
           externalLinksTarget: "_blank",
